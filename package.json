@@ -1,0 +1,40 @@
+{
+  "name": "electron-app",
+  "version": "0.1.0",
+  "homepage": "./",
+  "private": true,
+  "author": "BotyE",
+  "license": "ISC",
+  "scripts": {
+    "build:desktop": "tsc -p tsconfig.json",
+    "start:desktop": "npm run build:desktop && electron ./build/electron.js",
+    "build:exe": "electron-builder",
+    "pack": "electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.showup.app",
+    "productName": "Show UP",
+    "directories": {
+      "output": "build",
+      "buildResources": "resources"
+    },
+    "win": {
+      "target": "NSIS"
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false
+    }
+  },
+  "devDependencies": {
+    "@types/estree": "^1.0.1",
+    "@types/json-schema": "^7.0.12",
+    "electron": "^25.5.0",
+    "electron-builder": "^24.6.3",
+    "react-scripts": "^5.0.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "electron-localshortcut": "^3.2.1"
+  }
+}
