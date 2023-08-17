@@ -1,4 +1,4 @@
-import { app, BrowserWindow, crashReporter, globalShortcut, webContents, session, MenuItem, Menu  } from "electron"
+import { app, BrowserWindow, crashReporter, globalShortcut, desktopCapturer , session, MenuItem, Menu  } from "electron"
 const electronLocalshortcut = require('electron-localshortcut');
 import * as path from "path"
 
@@ -12,6 +12,16 @@ function createWindow() {
         autoHideMenuBar: true,
         fullscreenable: true
     });
+
+    desktopCapturer.getSources({ types: ['window', 'screen'] }).then(async sources => {
+        for (const source of sources) {
+          if (source.name === 'Electron') {
+            mainWindow.webContents.send('SET_SOURCE', source.id)
+            return
+          }
+        }
+      })
+
     const template = 
         {
           label: 'Clear Cache',
